@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Age of War</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <canvas id="game" width="1200" height="600"></canvas>
+
+    <div id="gameData">
+        <div id="player" class="data">
+            <p>HP: <span id="health"></span></p>
+            <p>$ <span id="money"></span></p>
+            <p>Upgrade Towers with "u" (100, 150)</p>
+        </div>
+
+        <div id="enemy" class="data">
+            <p>HP: <span id="eHealth"></span></p>
+            <p>$ <span id="eMoney"></span></p>
+        </div>
+
+        <div class="summons">
+            <button class="summonBtn" id="one">one</button>
+            <button class="summonBtn" id="two">two</button>
+            <button class="summonBtn" id="three">three</button>
+            <button class="summonBtn" id="four">four</button>
+        </div>
+
+    </div>
+
+    <script src="JS/constVariables.js"></script>
+    <script src="JS/util.js"></script>
+    <script src="JS/Player.js"></script>
+    <script src="JS/base.js"></script>
+    <script src="JS/creature.js"></script>
+    <script src="JS/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: dimgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+    flex-wrap: wrap;
+}
+
+#game{
+    border: 3px solid aliceblue;
+}
+
+#gameData{
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.data{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.summons{
+    width: 45%;
+    margin-left: 13.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.summonBtn{
+    width: 12%;
+    height: 50px;
+    opacity: .9;
+    border-radius: 5px;
+    background: black;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+
+#player{
+
+}
+
+#enemy{
+
+}
