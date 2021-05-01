@@ -13,7 +13,7 @@
             v.summonOptionsArr[i].disabled = true;
             v.summonOptionsArr[i].style.opacity = ".2";
             player.money -= cost;
-            const unit = new Creature(v.pStart, v.hStart - summonCall.h, summonCall.w, summonCall.h, 10, 3.5, summonCall.color, false, i);
+            const unit = new Creature(v.pStart, v.hStart - summonCall.h, summonCall.w, summonCall.h, v.getHp(i), v.getSpd(i), summonCall.color, false, i);
             player.units.push(unit);
         }
         v.playerMoney.innerText = player.money.toFixed(1);
@@ -22,13 +22,15 @@
         });
     }));
 
+
+
     // this will be a btn later
     window.addEventListener("keydown", (e) => {
         let cost = home.towerCount * 50 + 50;
         if(e.key === "u" &&
             home.towerCount < 3 &&
             player.money >= cost) {
-            home.towerCount++;
+            home.upgrade();
             player.money -= cost;
             v.playerMoney.innerText = player.money.toFixed(1);
         }
@@ -47,11 +49,11 @@
         const cost = (summonIDX * 10) + 10;
         if(enemy.money >= cost) {
             enemy.money -= cost;
-            enemy.units.push(new Creature(v.eStart, v.hStart - summonCall.h, summonCall.w, summonCall.h, 10, 3.5, summonCall.color, true, summonIDX));
+            enemy.units.push(new Creature(v.eStart, v.hStart - summonCall.h, summonCall.w, summonCall.h, v.getHp(summonIDX), v.getSpd(summonIDX), summonCall.color, true, summonIDX));
         }
         v.enemyMoney.innerText = enemy.money.toFixed(1);
     }
-    setInterval(enemyUnits, 2950);
+    //setInterval(enemyUnits, 2950);
 
 
 
@@ -88,16 +90,11 @@
 
 
 
-
-
-
-
-
-
     const draw = () => {
         fill(0, 0, v.c.width, v.c.height, "#201717");
     }
     const load = () => {
+        v.canAfford(player);
         fill(0, 0, 0, 0, "#0d3c5c"); // draw canvas
         draw(); // draw and reset canvas with ^^ color for some reason
         fill(-1, -1, 1, 1, "#05845e"); // set color (not sure why this is needed)
@@ -106,6 +103,11 @@
             creature.show();
             creature.move();
             evalContact(creature, enemy.units, true);
+            if(v.canHitBase(creature, true, home, enemyBase, enemy)) {
+                // stop because i am attacking the base
+                creature.s = 0;
+                home.hp--; // this will be damage from each unit
+            }
         });
         player.update();
         v.playerMoney.innerText = player.money.toFixed(1);
@@ -113,6 +115,10 @@
             creature.show();
             creature.move();
             evalContact(creature, player.units, false);
+            if(v.canHitBase(creature, false, home, enemyBase, player)) {
+                creature.s = 0;
+                enemyBase.hp--; // this will be damage from each unit
+            }
         });
         enemy.update();
         v.enemyMoney.innerText = enemy.money.toFixed(1);

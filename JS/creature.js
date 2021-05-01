@@ -2,12 +2,14 @@ function Creature(x, y, w, h, hp, s, c, isEnemy, lvl) {
     this.x = x;
     this.y = y;
     this.lvl = lvl;
-    this.hp = hp;
     this.s = s;
     this.w = w;
     this.h = h;
+    this.hp = hp;
     this.c = c;
     this.isEnemy = isEnemy;
+
+
 
     this.show = () => {
         if(this.hp > 0) {
@@ -36,7 +38,7 @@ function Creature(x, y, w, h, hp, s, c, isEnemy, lvl) {
     }
 
     this.attack = () => {
-        console.log("attacking");
+        fill(this.x, this.y - c.w / 2, 15, 15, "#fff");
     }
 
     this.getSight = () => {

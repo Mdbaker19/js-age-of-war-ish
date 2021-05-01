@@ -10,6 +10,21 @@ function Variables () {
 
     this.summonOptionsArr = Array.from(document.getElementsByClassName("summonBtn"));
 
+    this.towerOptionsArr = Array.from(document.getElementsByClassName("towerBtn"));
+
+    this.canAfford = (player) => {
+        this.towerOptionsArr.forEach( (tower, i) => {
+            const towerCost = (i + 40) * (i + 1);
+            if(towerCost > player.money) {
+                v.towerOptionsArr[i].style.opacity = ".2";
+                v.towerOptionsArr[i].disabled = true;
+            } else {
+                v.towerOptionsArr[i].style.opacity = "1";
+                v.towerOptionsArr[i].disabled = false;
+            }
+        });
+    }
+
     this.summonUnitArr = [
         {w: 20, h: 20, color: "#ae9"},
         {w: 12, h: 35, color: "#b72020"},
@@ -34,5 +49,28 @@ function Variables () {
     }
 
 
+    this.getHp = (hpLvl) => {
+        if (hpLvl === 0) {
+            return 10;
+        } else if (hpLvl === 1) {
+            return 15;
+        }
+        return hpLvl === 3 ? 40 : 65;
+    }
+
+    this.getSpd = (spdLvl) => {
+        return spdLvl % 2 === 0 ? (spdLvl === 2 ? 5 : 8) : (spdLvl === 1 ? 15 : 10);
+    }
+
+    this.canHitBase = (creature, isMe, home, enemyBase, otherPlayer) => {
+        const loc = isMe ? creature.x + creature.w : creature.x;
+        const baseToAttack = isMe ? enemyBase.x : home.x + home.w;
+        otherPlayer.units.forEach(unit => {
+            // if unit location is at the base level ( in between the enemy attacking the base and the base ) to be the one that takes damage instead // return false ( ? )
+            const offset = isMe ? -1 : 1; // not sure about this yet
+
+        });
+        return isMe ? loc + creature.getSight() >= baseToAttack : loc - creature.getSight() <= baseToAttack;
+    }
 
 }

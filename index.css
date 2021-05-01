@@ -31,7 +31,7 @@ body{
     justify-content: center;
 }
 
-.summons{
+.btnSet{
     width: 45%;
     margin-left: 13.5%;
     display: flex;
@@ -39,7 +39,7 @@ body{
     justify-content: space-evenly;
 }
 
-.summonBtn{
+.functionBtn{
     width: 12%;
     height: 50px;
     opacity: .9;
